@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"imperfect.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="如何利用hexo快速地搭建博客 相信大家对博客的重要性也都清楚，这里就不在赘述，下面就给各位小伙伴带来windows版的利用hexo搭建自己的博客。并且在免费的情况下，部署到github服务器上，摆脱只能localhost的访问方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用hexo搭建博客">
+<meta property="og:url" content="https://imperfect.top/posts/build-blog.html">
+<meta property="og:site_name" content="imperfect">
+<meta property="og:description" content="如何利用hexo快速地搭建博客 相信大家对博客的重要性也都清楚，这里就不在赘述，下面就给各位小伙伴带来windows版的利用hexo搭建自己的博客。并且在免费的情况下，部署到github服务器上，摆脱只能localhost的访问方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imperfect.top/posts/nodejs%E5%AE%98%E7%BD%91.png">
+<meta property="og:image" content="https://imperfect.top/posts/nodejs%E5%AE%89%E8%A3%85.png">
+<meta property="og:image" content="https://imperfect.top/posts/%E7%89%88%E6%9C%AC%E5%8F%B7.png">
+<meta property="og:image" content="https://imperfect.top/posts/cnpm%E7%89%88%E6%9C%AC%E5%8F%B7.png">
+<meta property="og:image" content="https://imperfect.top/posts/blog%E7%9B%AE%E5%BD%95.png">
+<meta property="og:image" content="https://imperfect.top/posts/hexo%E5%90%AF%E5%8A%A8.png">
+<meta property="og:image" content="https://imperfect.top/posts/hexo%E9%A6%96%E9%A1%B5.png">
+<meta property="og:image" content="https://imperfect.top/posts/%E5%8D%9A%E5%AE%A2%E4%BD%8D%E7%BD%AE.png">
+<meta property="og:image" content="https://imperfect.top/posts/%E5%8D%9A%E5%AE%A2.png">
+<meta property="og:image" content="https://imperfect.top/posts/github%E4%BB%93%E5%BA%93.png">
+<meta property="og:image" content="https://imperfect.top/posts/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://imperfect.top/posts/%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://imperfect.top/posts/github%E8%AE%BF%E9%97%AE.png">
+<meta property="og:image" content="https://imperfect.top/posts/%E4%B8%BB%E9%A2%98.png">
+<meta property="og:image" content="https://imperfect.top/posts/%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png">
+<meta property="article:published_time" content="2020-03-15T19:40:09.000Z">
+<meta property="article:modified_time" content="2020-05-05T03:20:37.254Z">
+<meta property="article:author" content="imperfect">
+<meta property="article:tag" content="生活">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imperfect.top/posts/nodejs%E5%AE%98%E7%BD%91.png">
+
+<link rel="canonical" href="https://imperfect.top/posts/build-blog.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>利用hexo搭建博客 | imperfect</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="imperfect" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">imperfect</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/build-blog.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="imperfect">
+      <meta itemprop="description" content="一个分享java有关技术的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="imperfect">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          利用hexo搭建博客
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-15 19:40:09" itemprop="dateCreated datePublished" datetime="2020-03-15T19:40:09Z">2020-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-05 03:20:37" itemprop="dateModified" datetime="2020-05-05T03:20:37Z">2020-05-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">各种问题</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="如何利用hexo快速地搭建博客"><a href="#如何利用hexo快速地搭建博客" class="headerlink" title="如何利用hexo快速地搭建博客"></a>如何利用hexo快速地搭建博客</h2><hr>
+<p>相信大家对博客的重要性也都清楚，这里就不在赘述，下面就给各位小伙伴带来windows版的利用hexo搭建自己的博客。并且在免费的情况下，部署到github服务器上，<strong>摆脱只能localhost的访问方式</strong></p>
+<a id="more"></a>
+
+<h3 id="1、下载node-js"><a href="#1、下载node-js" class="headerlink" title="1、下载node.js"></a>1、下载node.js</h3><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></p>
+<p>去nodejs的官网，然后下载LTS版本</p>
+<p><img src="nodejs%E5%AE%98%E7%BD%91.png" alt=""></p>
+<p>打开下载好的msi文件</p>
+<p><img src="nodejs%E5%AE%89%E8%A3%85.png" alt=""></p>
+<p>一般来说，所有的安装程序都是默认我们不懂配置的，所以一直点next（推荐安装在c盘）即可。</p>
+<p>默认情况下，npm是和nodejs一起自动安装的，安装完成后可以去cmd来查看nodejs和npm版本号</p>
+<p><img src="%E7%89%88%E6%9C%AC%E5%8F%B7.png" alt=""></p>
+<h3 id="2、下载npm镜像源（cnpm）"><a href="#2、下载npm镜像源（cnpm）" class="headerlink" title="2、下载npm镜像源（cnpm）"></a>2、下载npm镜像源（cnpm）</h3><p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https//registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p>在cmd的窗口输入即可，安装完成后，同样可以查看版本号</p>
+<p><img src="cnpm%E7%89%88%E6%9C%AC%E5%8F%B7.png" alt=""></p>
+<h3 id="3、安装hexo"><a href="#3、安装hexo" class="headerlink" title="3、安装hexo"></a>3、安装hexo</h3><p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>敲入后安装即可，同样可以用-v查看版本，这里就不赘述</p>
+<h3 id="4、创建文件夹"><a href="#4、创建文件夹" class="headerlink" title="4、创建文件夹"></a>4、创建文件夹</h3><p>首先创建一个文件夹，比如在xxx/blog，文件夹的名字随便取，以后所有有关自己博客的东西都在这个文件夹里面，哪里出了问题，直接把这个文件夹删了就完事了，推倒重来。</p>
+<h3 id="5、初始化hexo"><a href="#5、初始化hexo" class="headerlink" title="5、初始化hexo"></a>5、初始化hexo</h3><p>注意初始化的命令，以及后来有关hexo的命令，其实都要在cmd中先进入到这个路径，这里就是xxx/blog才行</p>
+<p>命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>然后你就会发现，blog目录下会出现一大堆克隆过来的文件</p>
+<p><img src="blog%E7%9B%AE%E5%BD%95.png" alt=""></p>
+<p>之后我们写博客，或者修改都是在这个文件夹里面进行</p>
+<h3 id="6、启动hexo"><a href="#6、启动hexo" class="headerlink" title="6、启动hexo"></a>6、启动hexo</h3><p>再次强调先进入目录的路径</p>
+<p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p><img src="hexo%E5%90%AF%E5%8A%A8.png" alt=""></p>
+<p>这样就正式启动了，可以通过<a href="http://localhost:4000来访问我们的博客">http://localhost:4000来访问我们的博客</a></p>
+<p><img src="hexo%E9%A6%96%E9%A1%B5.png" alt=""></p>
+<p>这个可能跟你们的不一样，因为我已经改了主题了，怎样改主题，后面也会讲</p>
+<h3 id="7、写博客"><a href="#7、写博客" class="headerlink" title="7、写博客"></a>7、写博客</h3><p>写博客呢，有两种方法，一个呢，是通过cmd新建一个，相信细心的小伙伴也发现了首页上有</p>
+<p>命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n "博客的名字"</span><br></pre></td></tr></table></figure>
+
+<p>输入后呢，来到我们上面的创建的目录里面，</p>
+<p><img src="%E5%8D%9A%E5%AE%A2%E4%BD%8D%E7%BD%AE.png" alt=""></p>
+<p>点开source，里面有个_posts文件，再点开，里面就是我们的blog地址</p>
+<p><img src="%E5%8D%9A%E5%AE%A2.png" alt=""></p>
+<p>至于第二种呢，则就是直接再这个地址下新建一个markdown文件，也是我推荐大家用的，毕竟是windows系统嘛。写完博客呢，我建议可以在命令行中敲入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>清理下hexo</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>重新生成下hexo</p>
+<p>其实如果在本地访问的话，直接刷新就可以看到变化了，但是我们主要是要让别人访问到嘛，所以还是建议大家这样做</p>
+<h3 id="8、部署到github"><a href="#8、部署到github" class="headerlink" title="8、部署到github"></a>8、部署到github</h3><h4 id="8-1-创建一个仓库"><a href="#8-1-创建一个仓库" class="headerlink" title="8.1 创建一个仓库"></a>8.1 创建一个仓库</h4><p><img src="github%E4%BB%93%E5%BA%93.png" alt=""></p>
+<p>我已经创建好仓库了，就给大家看下成品，接的仓库的名字必须是（username）.github.io这个名字也是我们后来直接访问的“域名”。</p>
+<h4 id="8-2-下载一个部署git"><a href="#8-2-下载一个部署git" class="headerlink" title="8.2  下载一个部署git"></a>8.2  下载一个部署git</h4><p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-3-修改配置文件"><a href="#8-3-修改配置文件" class="headerlink" title="8.3 修改配置文件"></a>8.3 修改配置文件</h4><p><img src="%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png" alt=""></p>
+<p><img src="%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png" alt=""></p>
+<p>当然repo的路径换成自己github中刚才创建仓库的地址</p>
+<h4 id="8-4-部署"><a href="#8-4-部署" class="headerlink" title="8.4 部署"></a>8.4 部署</h4><p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就能在自己的域名上访问了</p>
+<p><img src="github%E8%AE%BF%E9%97%AE.png" alt=""></p>
+<p><strong>注意：</strong>上面说的添加博客，你修改博客添加博客后，localhost可以直接刷新，但是如果想更新到github的这个上面，记得要hexo d，在这之前一定要hexo g，最好也能够hexo clean。</p>
+<h3 id="9、更换主题"><a href="#9、更换主题" class="headerlink" title="9、更换主题"></a>9、更换主题</h3><p>最后就粗略地讲下如果更换主题，要更换肯定地我们需要下载到相应的主题，怎样下载看各位小伙伴啦，这里我从github上下载了一个yilia的主题</p>
+<p><img src="%E4%B8%BB%E9%A2%98.png" alt=""></p>
+<p>怎么样生效呢，自然就想到了修改配置文件，同样是修改上面的_config.yml</p>
+<p><img src="%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png" alt=""></p>
+<p>接着hexo g重新生成就可以啦</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag"># 生活</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/firstBlog.html" rel="prev" title="我的第一篇博客">
+      <i class="fa fa-chevron-left"></i> 我的第一篇博客
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/collection.html" rel="next" title="java集合">
+      java集合 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何利用hexo快速地搭建博客"><span class="nav-number">1.</span> <span class="nav-text">如何利用hexo快速地搭建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、下载node-js"><span class="nav-number">1.1.</span> <span class="nav-text">1、下载node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、下载npm镜像源（cnpm）"><span class="nav-number">1.2.</span> <span class="nav-text">2、下载npm镜像源（cnpm）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、安装hexo"><span class="nav-number">1.3.</span> <span class="nav-text">3、安装hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、创建文件夹"><span class="nav-number">1.4.</span> <span class="nav-text">4、创建文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、初始化hexo"><span class="nav-number">1.5.</span> <span class="nav-text">5、初始化hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、启动hexo"><span class="nav-number">1.6.</span> <span class="nav-text">6、启动hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、写博客"><span class="nav-number">1.7.</span> <span class="nav-text">7、写博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、部署到github"><span class="nav-number">1.8.</span> <span class="nav-text">8、部署到github</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-创建一个仓库"><span class="nav-number">1.8.1.</span> <span class="nav-text">8.1 创建一个仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-下载一个部署git"><span class="nav-number">1.8.2.</span> <span class="nav-text">8.2  下载一个部署git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-修改配置文件"><span class="nav-number">1.8.3.</span> <span class="nav-text">8.3 修改配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-4-部署"><span class="nav-number">1.8.4.</span> <span class="nav-text">8.4 部署</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、更换主题"><span class="nav-number">1.9.</span> <span class="nav-text">9、更换主题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">imperfect</p>
+  <div class="site-description" itemprop="description">一个分享java有关技术的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">imperfect</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">172k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

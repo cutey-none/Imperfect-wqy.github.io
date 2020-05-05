@@ -128,17 +128,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">37</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -200,7 +200,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/950d0faf.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/design-template.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -214,272 +214,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/950d0faf.html" class="post-title-link" itemprop="url">双指针篇【leetcode题解】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-02 21:00:46" itemprop="dateCreated datePublished" datetime="2020-04-02T21:00:46Z">2020-04-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>9.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="1、简单"><a href="#1、简单" class="headerlink" title="1、简单"></a>1、简单</h3><h4 id="283-移动零"><a href="#283-移动零" class="headerlink" title="283. 移动零"></a><a href="https://leetcode-cn.com/problems/move-zeroes/" target="_blank" rel="noopener">283. 移动零</a></h4><hr>
-<p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,0,3,12]</span><br><span class="line">输出: [1,3,12,0,0]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>思路：</strong></p>
-<p>逐个遍历，如果遇到非0数，则从头开始给赋值，遍历结束完后再补0</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;	<span class="comment">//非0数的个数</span></span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;	<span class="comment">//从新开始赋值的下标</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[i] != <span class="number">0</span>)&#123;</span><br><span class="line">            num++;</span><br><span class="line">            nums[index++] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = num; i &lt; nums.length; i++) &#123;</span><br><span class="line">        nums[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="349-两个数组的交集"><a href="#349-两个数组的交集" class="headerlink" title="349. 两个数组的交集"></a><a href="https://leetcode-cn.com/problems/intersection-of-two-arrays/" target="_blank" rel="noopener">349. 两个数组的交集</a></h4><hr>
-<p>给定两个数组，编写一个函数来计算它们的交集。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums1 &#x3D; [1,2,2,1], nums2 &#x3D; [2,2]</span><br><span class="line">输出: [2]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums1 &#x3D; [4,9,5], nums2 &#x3D; [9,4,9,8,4]</span><br><span class="line">输出: [9,4]</span><br></pre></td></tr></table></figure>
-
-<p><strong>说明:</strong></p>
-<ul>
-<li>输出结果中的每个元素一定是唯一的。</li>
-<li>我们可以不考虑输出结果的顺序。</li>
-</ul>
-<hr>
-<p><strong>思路：</strong></p>
-<p>最难处理的是交集，所以在众多集合类中我们选择HashSet，可以自动去重。首先nums1，nums2，排序。用双指针相比较，哪个小哪个前进，如果相等，则放进set集合里面。</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] intersection(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;		<span class="comment">//双指针</span></span><br><span class="line">    Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    Arrays.sort(nums1);</span><br><span class="line">    Arrays.sort(nums2);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(p1 &lt; nums1.length &amp;&amp; p2 &lt; nums2.length)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums1[p1] &lt; nums2[p2])&#123;</span><br><span class="line">            p1++;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums2[p2] &lt; nums1[p1])&#123;</span><br><span class="line">            p2++;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            set.add(nums1[p1]);</span><br><span class="line">            p1++;</span><br><span class="line">            p2++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    p1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[set.size()];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> s : set) &#123;</span><br><span class="line">        result[p1++] = s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2、中等"><a href="#2、中等" class="headerlink" title="2、中等"></a>2、中等</h3><h4 id="11、盛最多水的容器"><a href="#11、盛最多水的容器" class="headerlink" title="11、盛最多水的容器"></a>11、盛最多水的容器</h4><hr>
-<p>给你 <em>n</em> 个非负整数 <em>a</em>1，<em>a</em>2，…，<em>a</em>n，每个数代表坐标中的一个点 (<em>i</em>, <em>ai</em>) 。在坐标内画 <em>n</em> 条垂直线，垂直线 <em>i</em> 的两个端点分别为 (<em>i</em>, <em>ai</em>) 和 (<em>i</em>, 0)。找出其中的两条线，使得它们与 <em>x</em> 轴共同构成的容器可以容纳最多的水。</p>
-<p><strong>说明：</strong>你不能倾斜容器，且 <em>n</em> 的值至少为 2。</p>
-<p><img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="img"></p>
-<p>图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,8,6,2,5,4,8,3,7]</span><br><span class="line">输出：49</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>思路：</strong></p>
-<p>头尾两个指针，能容纳的水就是所指向的内容小的数乘以两个指针的距离，同时做到，指针的前进和后退</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p1 = <span class="number">0</span>;					<span class="comment">//头指针</span></span><br><span class="line">    <span class="keyword">int</span> p2 = height.length - <span class="number">1</span>;	<span class="comment">//尾指针	</span></span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(p2 &gt;= p1)&#123;</span><br><span class="line">        <span class="keyword">if</span>(height[p1] &lt; height[p2])&#123;</span><br><span class="line">            temp = height[p1] * (p2 - p1);	<span class="comment">//容量</span></span><br><span class="line">            p1++;	<span class="comment">//指针的前进后退</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            temp = height[p2] * (p2 - p1);</span><br><span class="line">            p2--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; result)&#123;	<span class="comment">//比较上次和这次的</span></span><br><span class="line">            <span class="keyword">int</span> a = temp;</span><br><span class="line">            temp = result;</span><br><span class="line">            result = a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>再来看看精简版代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = height.length - <span class="number">1</span>, res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; j)&#123;</span><br><span class="line">        res = height[i] &lt; height[j] ? </span><br><span class="line">            Math.max(res, (j - i) * height[i++]): </span><br><span class="line">        Math.max(res, (j - i) * height[j--]); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="15、三数之和"><a href="#15、三数之和" class="headerlink" title="15、三数之和"></a>15、三数之和</h4><hr>
-<p>给你一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，*使得 *a + b + c =</em> 0 ？请你找出所有满足条件且不重复的三元组。</p>
-<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，</span><br><span class="line"></span><br><span class="line">满足要求的三元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>思路：</strong></p>
-<p>首先先排序，接着固定一个数，然后利用双指针来移动，一个从固定数的下一个开始，一个从最后一个数字开始，再来考虑去重问题，遇到相同的数跳过。</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; threeSum(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//先排序</span></span><br><span class="line">    Arrays.sort(nums);	</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//全大于0</span></span><br><span class="line">        <span class="keyword">if</span>(nums[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//第二次如果一样的固定数则跳过</span></span><br><span class="line">        <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>])&#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//双指针</span></span><br><span class="line">        <span class="keyword">int</span> p1 = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> p2 = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &lt; p2)&#123;</span><br><span class="line">			<span class="comment">//判断</span></span><br><span class="line">            <span class="keyword">if</span>(nums[i] + nums[p1] + nums[p2] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                p2--;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] + nums[p1] + nums[p2] &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                p1++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				</span><br><span class="line">                <span class="comment">//到这里已经确定了i， p1， p2这三个数</span></span><br><span class="line">                List&lt;Integer&gt; inner = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">                inner.add(nums[i]);</span><br><span class="line">                inner.add(nums[p1]);</span><br><span class="line">                inner.add(nums[p2]);</span><br><span class="line">                result.add(inner);</span><br><span class="line">			</span><br><span class="line">                <span class="comment">//去重，比如从p1开始后的数组（包括p1）是[..., -2(p1), -2, -2, ...]</span></span><br><span class="line">                <span class="comment">//这样就可以看到后面的遍历都是多余的，所以要去重</span></span><br><span class="line">                <span class="keyword">while</span>(p1 &lt; p2 &amp;&amp; nums[p1 + <span class="number">1</span>] == nums[p1])&#123;</span><br><span class="line">                    p1++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">while</span>(p1 &lt; p2 &amp;&amp; nums[p2 - <span class="number">1</span>] == nums[p2])&#123;</span><br><span class="line">                    p2--;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">//继续寻找看还有没有</span></span><br><span class="line">                p1++;</span><br><span class="line">                p2--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="16、最接近的三数之和"><a href="#16、最接近的三数之和" class="headerlink" title="16、最接近的三数之和"></a>16、最接近的三数之和</h4><hr>
-<p>给定一个包括 <em>n</em> 个整数的数组 <code>nums</code> 和 一个目标值 <code>target</code>。找出 <code>nums</code> 中的三个整数，使得它们的和与 <code>target</code> 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例如，给定数组 nums &#x3D; [-1，2，1，-4], 和 target &#x3D; 1.</span><br><span class="line"></span><br><span class="line">与 target 最接近的三个数的和为 2. (-1 + 2 + 1 &#x3D; 2).</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>思路：</strong>经过了上面三数之和的锻炼，肯定知道怎样去得到和，但是，如何知道最接近的呢？可以想到另设一个参考点（result）作为和（sum）和目标数（target）的差值，然后逐个比较。比如：</p>
-<ol>
-<li>target = 2， result = -2，result与target的距离为4</li>
-<li>进行遍历，有一组三数之和sum = 0</li>
-<li>此时sum与target的距离为3 &lt; 4</li>
-<li>用sum替换掉result，result = sum</li>
-<li>下一次遍历</li>
-</ol>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">threeSumClosest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//老套路，先排序</span></span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="comment">//先随便赋一个存在在数组里面的值给result作为参考数</span></span><br><span class="line">    <span class="keyword">int</span> result = nums[<span class="number">0</span>] + nums[<span class="number">1</span>] + nums[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="comment">//双指针</span></span><br><span class="line">        <span class="keyword">int</span> p1 = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> p2 = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &lt; p2)&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = nums[i] + nums[p1] + nums[p2];</span><br><span class="line">            <span class="comment">//如果sum与target的距离小于result和target的距离</span></span><br><span class="line">            <span class="comment">//则替换掉result，这样能保证result永远是最接近target的</span></span><br><span class="line">            <span class="keyword">if</span>(Math.abs(target - sum) &lt; Math.abs(target - result))&#123;</span><br><span class="line">                result = sum;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(target &gt; sum)&#123;</span><br><span class="line">                <span class="comment">//三数之和比目标小，首指针往前走，和会更大点</span></span><br><span class="line">                p1++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(target &lt; sum)&#123;</span><br><span class="line">                <span class="comment">//同样道理</span></span><br><span class="line">                p2--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;	<span class="comment">//既然有三数之和（sum）等于（target）那肯定是返回target</span></span><br><span class="line">                <span class="keyword">return</span> target;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="19、删除链表的倒数第n个节点"><a href="#19、删除链表的倒数第n个节点" class="headerlink" title="19、删除链表的倒数第n个节点"></a>19、删除链表的倒数第n个节点</h4><hr>
-<p>给定一个链表，删除链表的倒数第 <em>n</em> 个节点，并且返回链表的头结点。</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n &#x3D; 2.</span><br><span class="line"></span><br><span class="line">当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</span><br></pre></td></tr></table></figure>
-
-<p><strong>说明：</strong></p>
-<p>给定的 <em>n</em> 保证是有效的。</p>
-<hr>
-<p><strong>思路1：</strong>先遍历一次获取链表长度length，然后减去所给的数（n），得到需要删除元素的位置，再遍历一次，从而删除元素</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果只有一个元素，那么直接返回null</span></span><br><span class="line">    <span class="keyword">if</span>(head.next == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> length = <span class="number">1</span>;</span><br><span class="line">    ListNode temp = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//得到链表长度</span></span><br><span class="line">    <span class="keyword">while</span>(temp.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">        length++;</span><br><span class="line">        temp = temp.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(length == n)&#123;</span><br><span class="line">        <span class="keyword">return</span> head.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    temp = head;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//知道到需要删除元素d</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; length - n; i++) &#123;</span><br><span class="line">        temp = temp.next;</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode pre = temp;</span><br><span class="line">    ListNode target = temp.next;</span><br><span class="line">    ListNode after = target.next;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//节点的处理</span></span><br><span class="line">    pre.next = after;</span><br><span class="line">    target.next = <span class="keyword">null</span>;</span><br><span class="line">    target = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>思路2：</strong></p>
-<p>主要是用到双指针，慢指针（p1），快指针（p2），想法呢是当快指针的下一个指向null的时候（null == p2.next）的时候，p1指向的下一个元素就是我们要删除的节点。怎么样实现呢？</p>
-<ol>
-<li>假设一开始p1和p2都指向头指针（head），有一个链表1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5，要删除的是倒数第n（2）个节点。</li>
-<li>按照上面的思路呢，要求p1指向3的时候，p2指向5，这样null == p2.next，p1.next也刚好是我们要删除的节点。</li>
-<li>这样一看，会发现，p2刚好比p1多走了n步</li>
-<li>想想一种特殊情况，如果是删除倒数第5个节点呢，这样p2直接就指向了null，所以要返回的头节点就是p1.next</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ListNode p1 = head;</span><br><span class="line">    ListNode p2 = n1;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//快指针先走</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        p2 = p2.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//特殊情况</span></span><br><span class="line">    <span class="keyword">if</span>(p2 == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p2.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">        p2 = p2.next;</span><br><span class="line">        p1 = p1.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//到这里就说明null == p2.next</span></span><br><span class="line">    <span class="comment">//进行节点的操作</span></span><br><span class="line">    ListNode target = p1.next;</span><br><span class="line">    ListNode after = target.next;</span><br><span class="line">    p1.next = after;</span><br><span class="line">    </span><br><span class="line">    target.next = <span class="keyword">null</span>;</span><br><span class="line">    target = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="75、颜色分类"><a href="#75、颜色分类" class="headerlink" title="75、颜色分类"></a>75、颜色分类</h4><hr>
-<p>给定一个包含红色、白色和蓝色，一共 <em>n</em> 个元素的数组，<strong><a href="https://baike.baidu.com/item/原地算法" target="_blank" rel="noopener">原地</a></strong>对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。</p>
-<p>此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。</p>
-<p><strong>注意:</strong><br>不能使用代码库中的排序函数来解决这道题。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,0,2,1,1,0]</span><br><span class="line">输出: [0,0,1,1,2,2]</span><br></pre></td></tr></table></figure>
-
-<p><strong>进阶：</strong></p>
-<ul>
-<li>一个直观的解决方案是使用计数排序的两趟扫描算法。<br>首先，迭代计算出0、1 和 2 元素的个数，然后按照0、1、2的排序，重写当前数组。</li>
-<li>你能想出一个仅使用常数空间的一趟扫描算法吗？</li>
-</ul>
-<hr>
-<p><strong>思路：</strong></p>
-<p>很直观暴力的方法这里就不说了，来用一趟扫描算法就解决问题是最好的。</p>
-<p>最初的想法就是逐个遍历，遇到2移到最右边，遇到0移到最左边，剩下的中间就是1了。假如第一个数字就是2呢，当然肯定是和最右边的数进行交换，并且所谓的最右边是不是要往前移动1。</p>
-<p>上面的思路就设及到了3个变量，逐个遍历需要一个指针（cur），最左边（p1），最右边（p2）。</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p2 = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> temp = <span class="number">0</span>;		<span class="comment">//用来交换临时变量</span></span><br><span class="line">    <span class="keyword">while</span>(cur &lt;= p2) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[cur] == <span class="number">2</span>)&#123;	<span class="comment">//如果遍历的到的数==2，交换</span></span><br><span class="line">            temp = nums[cur];</span><br><span class="line">            nums[cur] = nums[p2];</span><br><span class="line">            nums[p2] = temp;</span><br><span class="line">            p2--;			<span class="comment">//最右边的指针后退</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(nums[cur] == <span class="number">0</span>)&#123;	<span class="comment">//如果==0，交换</span></span><br><span class="line">            temp = nums[cur];</span><br><span class="line">            nums[cur] = nums[p1];</span><br><span class="line">            nums[p1] = temp;</span><br><span class="line">            p1++;			<span class="comment">//最左边的指针前进</span></span><br><span class="line">            <span class="comment">//为什么要cur++？</span></span><br><span class="line">            <span class="comment">//假设第一个数字刚好是0，如果不加会怎么样？</span></span><br><span class="line">            <span class="comment">//p1一直++，而cur不更新，一直是nums[cur] == 0;</span></span><br><span class="line">            <span class="comment">//而且进入到这个循环nums[cur]要么等于0，要么等于1，这两种情况cur都要++</span></span><br><span class="line">            cur++;			</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//同样进入到这个判断就是nums[cur] == 1</span></span><br><span class="line">            cur++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3、困难"><a href="#3、困难" class="headerlink" title="3、困难"></a>3、困难</h3><hr>
-<h4 id="42、接雨水"><a href="#42、接雨水" class="headerlink" title="42、接雨水"></a>42、接雨水</h4><hr>
-<p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png" alt="img"></p>
-<p>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 <strong>感谢 Marcos</strong> 贡献此图。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>思路：</strong></p>
-<p>这种接雨水问题，主要是要考虑木桶原理，也就是要尽可能地去找出短的一边，而且一般来说，这种遍历问题，使用双指针的效率比较搞。下面来看看具体情况：</p>
-<ol>
-<li>左边比较低</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">          *</span><br><span class="line">*_ _ _ _ _*</span><br></pre></td></tr></table></figure>
-
-<p>左边比较低呢，我们就要从左边取1，然后可以接5滴雨水</p>
-<ol start="2">
-<li>右边比较低</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*         </span><br><span class="line">*_ _ _ _ _*</span><br></pre></td></tr></table></figure>
-
-<p>这样我们就要从右边取1，同样能接5滴雨水</p>
-<ol start="3">
-<li>中间还有一个多余的</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">        *</span><br><span class="line">        *     *</span><br><span class="line">* _ _ _ * _ _ *</span><br></pre></td></tr></table></figure>
-
-<p>这种情况的话呢，一开始是<strong>最左边</strong>的比<strong>最右边</strong>的低，取左边的1 * 3 = 3，接着呢最左边<strong>变成了3</strong>，比最右边的低，取右边的2 * 2 = 4。所以总共能接7滴雨水。</p>
-<ol start="4">
-<li>中间有两个多余的呢</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">          *    </span><br><span class="line">      *   *</span><br><span class="line">*     *   *</span><br><span class="line">* _ _ * _ * _ _ *</span><br></pre></td></tr></table></figure>
-
-<p>各位小伙伴也可以先想想了，首先取右边1 * 2 = 2，接着左边2 * 2 = 4，再接着左边3 * 1 = 3，总共能接9滴雨水。</p>
-<p>中间再复杂也是这个思路，但是我们现在是上帝视角，所以能知道多少个空，可以用乘法，到写程序的时候肯定是需要遍历，然后用加法的。</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right = height.length - <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//用来记录左右最高峰</span></span><br><span class="line">    <span class="keyword">int</span> left_max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right_max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">        <span class="comment">//左边的比右边的低</span></span><br><span class="line">        <span class="keyword">if</span>(height[left] &lt; height[right])&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">/**假设现在开头是[2, 1, 0, 2, ... , 3]</span></span><br><span class="line"><span class="comment">              * 一开始height[left] 和 leftmax肯定相等 = 2，所以result其实加的是0</span></span><br><span class="line"><span class="comment">              * 再一次循环呢，height[left] = 1, left_max还是等于2</span></span><br><span class="line"><span class="comment">              * 就证明有一个空位可以接水，这样逐个遍历就首先了加法</span></span><br><span class="line"><span class="comment">              */</span></span><br><span class="line">            left_max = Math.max(left_max, height[left]);</span><br><span class="line">            result += left_max - height[left++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right_max = Math.max(right_max, height[right]);</span><br><span class="line">            result += right_max - height[right--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="61、旋转链表"><a href="#61、旋转链表" class="headerlink" title="61、旋转链表"></a>61、旋转链表</h4><hr>
-<p>给定一个链表，旋转链表，将链表每个节点向右移动 <em>k</em> 个位置，其中 <em>k</em> 是非负数。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k &#x3D; 2</span><br><span class="line">输出: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: 5-&gt;1-&gt;2-&gt;3-&gt;4-&gt;NULL</span><br><span class="line">向右旋转 2 步: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: 0-&gt;1-&gt;2-&gt;NULL, k &#x3D; 4</span><br><span class="line">输出: 2-&gt;0-&gt;1-&gt;NULL</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: 2-&gt;0-&gt;1-&gt;NULL</span><br><span class="line">向右旋转 2 步: 1-&gt;2-&gt;0-&gt;NULL</span><br><span class="line">向右旋转 3 步: 0-&gt;1-&gt;2-&gt;NULL</span><br><span class="line">向右旋转 4 步: 2-&gt;0-&gt;1-&gt;NULL</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>思路：</strong></p>
-<p>因为是向右移动节点，自然而然地就想到了先首尾相连成一个环，再来看下情况如何</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 --&gt; 2 --&gt; 3 --&gt; 4 --&gt; 5</span><br><span class="line">^                       |</span><br><span class="line">| __ __ __ __ __ __ __ _|</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>如果移动1，那么5为新的head，4为新的tail，从旧的head（1）移到4需要3步</li>
-<li>如果移动2，那么4为新的head，3为新的tail，同上需要2步</li>
-<li>如果移动3，那么3为新的head，2为新的tail，同上需要1步</li>
-</ol>
-<p>找到新的头尾节点后需要的就是把环破坏掉（tail的下一个节点指向空即可），大家有没有发现什么嘛，就是tail 是等于length - k - 1，还有呢，想想k如果大于一个链表的长度呢。如果长度为5，k=5的话是不是相当于移动0次，k=6的话是不是相当于移动1次。</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">rotateRight</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//边界情况直接返回head</span></span><br><span class="line">    <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span> || k == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> length = <span class="number">1</span>;</span><br><span class="line">    ListNode oldTail = head;</span><br><span class="line">    ListNode newTail = head;</span><br><span class="line">    ListNode newHead = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//遍历到旧尾节点，统计链表长度, 并且头尾相连</span></span><br><span class="line">    <span class="keyword">while</span>(oldTail.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">        oldTail = oldTail.next;</span><br><span class="line">        length++;</span><br><span class="line">    &#125;</span><br><span class="line">    oldTail.next = head;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//计算真正的k</span></span><br><span class="line">    k %= length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length - k - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        newTail = newTail.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    newHead = newTail.next;</span><br><span class="line">    newTail.next = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> newHead;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/d5c2f3a8.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="imperfect">
-      <meta itemprop="description" content="一个分享java有关技术的博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="imperfect">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/d5c2f3a8.html" class="post-title-link" itemprop="url">模板方法模式【java设计模式】</a>
+            <a href="/posts/design-template.html" class="post-title-link" itemprop="url">模板方法模式【java设计模式】</a>
         </h2>
 
         <div class="post-meta">
@@ -496,7 +231,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:20:08" itemprop="dateModified" datetime="2020-05-05T03:20:08Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -536,7 +271,7 @@
           <p>用一个例子来让大家理解什么叫模板方法模式，直接进入主题。<strong>背景：</strong>现在你是荣耀王者段位，你要给新手推荐英雄出装，需要什么呢，需要一个抽象英雄类，里面有装备（方法），再有一个具体英雄类即可。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/d5c2f3a8.html#more" rel="contents">
+              <a class="btn" href="/posts/design-template.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -560,7 +295,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/d76ea658.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/design-builder.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -574,7 +309,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/d76ea658.html" class="post-title-link" itemprop="url">建造者模式【java设计模式】</a>
+            <a href="/posts/design-builder.html" class="post-title-link" itemprop="url">建造者模式【java设计模式】</a>
         </h2>
 
         <div class="post-meta">
@@ -591,7 +326,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:18:41" itemprop="dateModified" datetime="2020-05-05T03:18:41Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -631,7 +366,7 @@
           <p>什么是建造者模式呢，顾名思义，把某个东西创建出来，说得准确点是，把各种部件按照需要的方式建造成一个产品。建造者模式<strong>需要四个类，抽象建造者，具体建造者，产品类，导演类</strong>。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/d76ea658.html#more" rel="contents">
+              <a class="btn" href="/posts/design-builder.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -655,7 +390,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/27aaf63a.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/design-proxy.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -669,7 +404,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/27aaf63a.html" class="post-title-link" itemprop="url">代理模式【java设计模式】</a>
+            <a href="/posts/design-proxy.html" class="post-title-link" itemprop="url">代理模式【java设计模式】</a>
         </h2>
 
         <div class="post-meta">
@@ -686,7 +421,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:17:53" itemprop="dateModified" datetime="2020-05-05T03:17:53Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -723,11 +458,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><hr>
+          <hr>
 <p>代理模式也算是比较常用的设计模式之一，大家接触最多的spring aop，就是采用动态代理模式来完成的。代理模式可以分为普通代理模式，强制代理模式，动态代理模式，也是本文着重讲解的，当然还有其代理模式。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/27aaf63a.html#more" rel="contents">
+              <a class="btn" href="/posts/design-proxy.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -751,7 +486,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/e041d20.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/design-factory.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -765,7 +500,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/e041d20.html" class="post-title-link" itemprop="url">工厂及抽象工厂模式【java设计模式】</a>
+            <a href="/posts/design-factory.html" class="post-title-link" itemprop="url">工厂及抽象工厂模式【java设计模式】</a>
         </h2>
 
         <div class="post-meta">
@@ -782,7 +517,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:18:32" itemprop="dateModified" datetime="2020-05-05T03:18:32Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -822,7 +557,7 @@
           <p>有关工厂模式有三种，简单工厂，工厂，抽象工厂，通常来说，前面两者并为一项说工厂模式。那么什么叫工厂模式呢，最简单来说，你没必要和产品打交道，你直接和工厂打交道，把new 产品的操作交给工厂来做。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/e041d20.html#more" rel="contents">
+              <a class="btn" href="/posts/design-factory.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -846,7 +581,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/b3fe08a4.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/design-singleton.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -860,7 +595,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/b3fe08a4.html" class="post-title-link" itemprop="url">单例模式【java设计模式】</a>
+            <a href="/posts/design-singleton.html" class="post-title-link" itemprop="url">单例模式【java设计模式】</a>
         </h2>
 
         <div class="post-meta">
@@ -877,7 +612,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:18:19" itemprop="dateModified" datetime="2020-05-05T03:18:19Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -917,7 +652,7 @@
           <p>定义如下：确保某一个类只有一个实例，而且自行实例化并向整个系统提供实例。是一个比较简单的模式，非说哪里复杂的话，就是实现方式比较多。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/b3fe08a4.html#more" rel="contents">
+              <a class="btn" href="/posts/design-singleton.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -941,7 +676,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/4522df16.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/serialize.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -955,7 +690,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/4522df16.html" class="post-title-link" itemprop="url">序列化与反序列化</a>
+            <a href="/posts/serialize.html" class="post-title-link" itemprop="url">序列化与反序列化</a>
         </h2>
 
         <div class="post-meta">
@@ -972,7 +707,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:24:24" itemprop="dateModified" datetime="2020-05-05T03:24:24Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1140,7 +875,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/7d7497f6.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/hashmap-resize.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1154,7 +889,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/7d7497f6.html" class="post-title-link" itemprop="url">HashMap中的扩容以及put</a>
+            <a href="/posts/hashmap-resize.html" class="post-title-link" itemprop="url">HashMap中的扩容以及put</a>
         </h2>
 
         <div class="post-meta">
@@ -1171,7 +906,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:28:34" itemprop="dateModified" datetime="2020-05-05T03:28:34Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1212,7 +947,7 @@
 <p>之前的一篇博客中也讲过HashMap算是我们在使用Map中一个比较常见的实现类，但是我们并没有深究其源码，本篇博客讲重点简述三个方面的源码分析。<strong><em>容量、扩容和put方法。</em></strong>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/7d7497f6.html#more" rel="contents">
+              <a class="btn" href="/posts/hashmap-resize.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1236,7 +971,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/da47709c.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/mybatis-quick-start.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1250,7 +985,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/da47709c.html" class="post-title-link" itemprop="url">mybatis【快速入门】</a>
+            <a href="/posts/mybatis-quick-start.html" class="post-title-link" itemprop="url">mybatis【快速入门】</a>
         </h2>
 
         <div class="post-meta">
@@ -1267,7 +1002,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:35:35" itemprop="dateModified" datetime="2020-05-05T03:35:35Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1310,7 +1045,7 @@
 <p>我们需要知道mybatis是用来干什么？首先，mybatis是工作在持久层，说得简单一点呢，就是和数据库打交道的。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/da47709c.html#more" rel="contents">
+              <a class="btn" href="/posts/mybatis-quick-start.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1334,7 +1069,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/ecb26108.html">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/thread-status.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1348,7 +1083,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/ecb26108.html" class="post-title-link" itemprop="url">线程状态</a>
+            <a href="/posts/thread-status.html" class="post-title-link" itemprop="url">线程状态</a>
         </h2>
 
         <div class="post-meta">
@@ -1365,7 +1100,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 14:04:43" itemprop="dateModified" datetime="2020-05-02T14:04:43Z">2020-05-02</time>
+                <time title="修改时间：2020-05-05 03:23:54" itemprop="dateModified" datetime="2020-05-05T03:23:54Z">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1406,7 +1141,103 @@
 <p>下面开始多线程知识的回顾，但是我不会一篇博客就复习完，那样篇幅真的是太长太长了，我写得难受，各位小伙伴看得也难受，本篇博客重点介绍多线程的<strong>生命周期五个状态</strong>。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/ecb26108.html#more" rel="contents">
+              <a class="btn" href="/posts/thread-status.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/thread-createEnd.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="imperfect">
+      <meta itemprop="description" content="一个分享java有关技术的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="imperfect">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/thread-createEnd.html" class="post-title-link" itemprop="url">线程的创建与结束</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-27 16:05:50" itemprop="dateCreated datePublished" datetime="2020-03-27T16:05:50Z">2020-03-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-05 03:23:42" itemprop="dateModified" datetime="2020-05-05T03:23:42Z">2020-05-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="线程的创建、结束以及线程池"><a href="#线程的创建、结束以及线程池" class="headerlink" title="线程的创建、结束以及线程池"></a>线程的创建、结束以及线程池</h2><hr>
+<p>之前了解了线程的五个状态，这篇博客将带你了解线程是如何创建，如何解锁，以及四个常用的线程池。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/thread-createEnd.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1495,20 +1326,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1544,12 +1375,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">164k</span>
+    <span title="站点总字数">172k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:29</span>
+    <span title="站点阅读时长">2:36</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

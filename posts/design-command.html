@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"imperfect.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="命令模式，一句话就是给你一个命令，必须要遵守并且执行，有点像是军队里面“服从命令是军人的天职”。 不知道大学有没有参加过数学建模，反正我是没有参加过，但是有了解过一般构成，一个小队里面一般有主要负责搜索的同学，写代码的同学，写论文的同学和指导老师 普通模式：抽象成员类(receiver)：123456789public abstract class NTeammate &amp;#123;    publ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令模式【java设计模式】">
+<meta property="og:url" content="https://imperfect.top/posts/design-command.html">
+<meta property="og:site_name" content="imperfect">
+<meta property="og:description" content="命令模式，一句话就是给你一个命令，必须要遵守并且执行，有点像是军队里面“服从命令是军人的天职”。 不知道大学有没有参加过数学建模，反正我是没有参加过，但是有了解过一般构成，一个小队里面一般有主要负责搜索的同学，写代码的同学，写论文的同学和指导老师 普通模式：抽象成员类(receiver)：123456789public abstract class NTeammate &amp;#123;    publ">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imperfect.top/posts/1.png">
+<meta property="og:image" content="https://imperfect.top/posts/2.png">
+<meta property="og:image" content="https://imperfect.top/posts/3.png">
+<meta property="article:published_time" content="2020-04-09T18:07:08.000Z">
+<meta property="article:modified_time" content="2020-05-05T03:19:56.596Z">
+<meta property="article:author" content="imperfect">
+<meta property="article:tag" content="进阶">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imperfect.top/posts/1.png">
+
+<link rel="canonical" href="https://imperfect.top/posts/design-command.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>命令模式【java设计模式】 | imperfect</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="imperfect" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">imperfect</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/design-command.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="imperfect">
+      <meta itemprop="description" content="一个分享java有关技术的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="imperfect">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          命令模式【java设计模式】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-09 18:07:08" itemprop="dateCreated datePublished" datetime="2020-04-09T18:07:08Z">2020-04-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-05 03:19:56" itemprop="dateModified" datetime="2020-05-05T03:19:56Z">2020-05-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>命令模式，一句话就是给你一个命令，必须要遵守并且执行，有点像是军队里面“服从命令是军人的天职”。</p>
+<p>不知道大学有没有参加过数学建模，反正我是没有参加过，但是有了解过一般构成，一个小队里面一般有主要负责<strong>搜索的同学，写代码的同学，写论文的同学和指导老师</strong></p>
+<h3 id="普通模式："><a href="#普通模式：" class="headerlink" title="普通模式："></a>普通模式：</h3><h4 id="抽象成员类-receiver-："><a href="#抽象成员类-receiver-：" class="headerlink" title="抽象成员类(receiver)："></a>抽象成员类(receiver)：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">NTeammate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">changeRequire</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Searcher"><a href="#Searcher" class="headerlink" title="Searcher:"></a>Searcher:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NSearcher</span> <span class="keyword">extends</span> <span class="title">NTeammate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeRequire</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"searcher 了解到需求改变"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"searcher 开始搜索相关信息"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Writer"><a href="#Writer" class="headerlink" title="Writer:"></a>Writer:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NWriter</span> <span class="keyword">extends</span> <span class="title">NTeammate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeRequire</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"writer 了解到需求改变"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"writer 修改论文"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"writer 开始写论文"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Coder"><a href="#Coder" class="headerlink" title="Coder:"></a>Coder:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NCoder</span> <span class="keyword">extends</span> <span class="title">NTeammate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeRequire</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"coder 了解到需求改变"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"coder 修改代码"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"coder 开始码代码"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Teacher"><a href="#Teacher" class="headerlink" title="Teacher:"></a>Teacher:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NTeacher</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        NTeammate writer = <span class="keyword">new</span> NWriter();</span><br><span class="line">        <span class="comment">//需要改文章了</span></span><br><span class="line">        writer.modify();</span><br><span class="line">        writer.work();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一开始，老师看到写的文展不够简洁，所以就打电话给writer，让他修改，所以就有了上面的Teacher类。这样其实还好，因为文章嘛，修改润色就好了。</p>
+<p>过了一天，老师仔细看了下后，发现代码的算法有bug，这个漏洞导致了不仅coder要修改代码，writer也要修改相应地方的文章。老师这下不仅要练习writer，也得练习coder，那么Teacher类应该怎么修改呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NTeacher</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        NTeammate writer = <span class="keyword">new</span> NWriter();</span><br><span class="line">        NTeammate coder = <span class="keyword">new</span> NCoder();</span><br><span class="line">        <span class="comment">//需要改bug和文章了</span></span><br><span class="line">        writer.modify();</span><br><span class="line">        writer.work();</span><br><span class="line">        </span><br><span class="line">        coder.modify();</span><br><span class="line">        coder.work();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h4><p><img src="1.png" alt=""></p>
+<p>可以发现，就多了一个需求，代码较之前已经有很大的改动了，这是我们不希望看到的。可能有的小伙伴会想到利用中介者模式，不过中介者模式是为了减小类和类之间的耦合，这个例子中的searcher，writer，coder并没有耦合，都在各司其职。</p>
+<h3 id="命令模式："><a href="#命令模式：" class="headerlink" title="命令模式："></a>命令模式：</h3><p>如果小队里面有个队长（<strong>Invoker</strong>）就好了，可以和老师（<strong>client</strong>）沟通，不止这样，老师的指令实现起来肯定是String类型，我们可以把指令封装称一个类（<strong>command</strong>），队长只需要发布命令，命令指示队员（<strong>receiver</strong>）来做什么。这就是命令模式，队员必须执行命令要求做的。</p>
+<p>抽象队员以及具体队员还是和上面一样，这里就不再赘述。</p>
+<h4 id="抽象命令类："><a href="#抽象命令类：" class="headerlink" title="抽象命令类："></a>抽象命令类：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractCommand</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> Coder coder = <span class="keyword">new</span> Coder();</span><br><span class="line">    <span class="keyword">protected</span> Searcher searcher = <span class="keyword">new</span> Searcher();</span><br><span class="line">    <span class="keyword">protected</span> Writer writer = <span class="keyword">new</span> Writer();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//一定要有个执行的方法，下达一个命令</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="具体命令类-Command-："><a href="#具体命令类-Command-：" class="headerlink" title="具体命令类(Command)："></a>具体命令类(Command)：</h4><p>有哪些命令，都可以封装起来</p>
+<h5 id="改变需求："><a href="#改变需求：" class="headerlink" title="改变需求："></a>改变需求：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChangeInfoCommand</span> <span class="keyword">extends</span> <span class="title">AbstractCommand</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        searcher.changeRequire();</span><br><span class="line">        writer.changeRequire();</span><br><span class="line">        coder.changeRequire();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改文章："><a href="#修改文章：" class="headerlink" title="修改文章："></a>修改文章：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModifyArticleCommand</span> <span class="keyword">extends</span> <span class="title">AbstractCommand</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        writer.modify();</span><br><span class="line">        writer.work();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改代码："><a href="#修改代码：" class="headerlink" title="修改代码："></a>修改代码：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModifyCodeCommand</span> <span class="keyword">extends</span> <span class="title">AbstractCommand</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        coder.modify();</span><br><span class="line">        coder.work();</span><br><span class="line">        writer.modify();</span><br><span class="line">        writer.work();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="队长类-Invoke-："><a href="#队长类-Invoke-：" class="headerlink" title="队长类(Invoke)："></a>队长类(Invoke)：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Captain</span> </span>&#123;</span><br><span class="line">    <span class="comment">//和命令产生联系</span></span><br><span class="line">    AbstractCommand abstractCommand;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Captain</span><span class="params">(AbstractCommand abstractCommand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.abstractCommand = abstractCommand;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">invoke</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//发布命令要求队员进行相应的动作</span></span><br><span class="line">        abstractCommand.execute();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="老师类-Client-："><a href="#老师类-Client-：" class="headerlink" title="老师类(Client)："></a>老师类(Client)：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AbstractCommand command = <span class="keyword">new</span> ModifyCodeCommand();</span><br><span class="line">        Captain captain = <span class="keyword">new</span> Captain(command);</span><br><span class="line">        captain.invoke();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出：-1"><a href="#输出：-1" class="headerlink" title="输出："></a>输出：</h4><p><img src="2.png" alt=""></p>
+<p>如果老师觉得又不好了，这些怎么办呢，没有必要和成员练习，只需要提出另外一个建议，队长也不要跟队员练习，只需要发布命令，由命令指示队员去做。修改就是这么简单，一行代码的事情。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//AbstractCommand command = new ModifyCodeCommand();</span></span><br><span class="line">        AbstractCommand command = <span class="keyword">new</span> ModifyArticleCommand();</span><br><span class="line">        Captain captain = <span class="keyword">new</span> Captain(command);</span><br><span class="line">        captain.invoke();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h3><p>如果说，诶，改代码的时候不仅需要修改bug和修正文章，也需要searcher来搜集信息，怎么办呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModifyCodeCommand</span> <span class="keyword">extends</span> <span class="title">AbstractCommand</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        searcher.work();	<span class="comment">//只需要在具体的命令里面添加即可，客户端是完全不知道的</span></span><br><span class="line">        coder.modify();</span><br><span class="line">        coder.work();</span><br><span class="line">        writer.modify();</span><br><span class="line">        writer.work();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有一种情况就是，某些修改之后，老师发现还是之前的版本比较好，这就要求每个队员都有一个回调函数来撤销动作，返回到上一个状态，就是找到保存的之前版本的文件。<strong>只需要在抽象receiver类加一个回调函数即可</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">NTeammate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">changeRequire</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//具体队友在根据自己的方式实现回调方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">rollback</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着就是添加一个<strong>撤回命令</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">callBackCommand</span> <span class="keyword">extends</span> <span class="title">AbstractCommand</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//当然，需要谁撤回是可以改变的</span></span><br><span class="line">        searcher.rollback();</span><br><span class="line">        writer.rollback();</span><br><span class="line">        coder.rollback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UML类图："><a href="#UML类图：" class="headerlink" title="UML类图："></a>UML类图：</h3><p><img src="3.png" alt=""></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag"># 进阶</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/design-mediator.html" rel="prev" title="中介者模式【java设计模式】">
+      <i class="fa fa-chevron-left"></i> 中介者模式【java设计模式】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/design-responsibility.html" rel="next" title="责任链模式【java设计模式】">
+      责任链模式【java设计模式】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通模式："><span class="nav-number">1.</span> <span class="nav-text">普通模式：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象成员类-receiver-："><span class="nav-number">1.1.</span> <span class="nav-text">抽象成员类(receiver)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Searcher"><span class="nav-number">1.2.</span> <span class="nav-text">Searcher:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Writer"><span class="nav-number">1.3.</span> <span class="nav-text">Writer:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Coder"><span class="nav-number">1.4.</span> <span class="nav-text">Coder:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Teacher"><span class="nav-number">1.5.</span> <span class="nav-text">Teacher:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出："><span class="nav-number">1.6.</span> <span class="nav-text">输出：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式："><span class="nav-number">2.</span> <span class="nav-text">命令模式：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象命令类："><span class="nav-number">2.1.</span> <span class="nav-text">抽象命令类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体命令类-Command-："><span class="nav-number">2.2.</span> <span class="nav-text">具体命令类(Command)：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#改变需求："><span class="nav-number">2.2.1.</span> <span class="nav-text">改变需求：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改文章："><span class="nav-number">2.2.2.</span> <span class="nav-text">修改文章：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改代码："><span class="nav-number">2.2.3.</span> <span class="nav-text">修改代码：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#队长类-Invoke-："><span class="nav-number">2.3.</span> <span class="nav-text">队长类(Invoke)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老师类-Client-："><span class="nav-number">2.4.</span> <span class="nav-text">老师类(Client)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出：-1"><span class="nav-number">2.5.</span> <span class="nav-text">输出：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展："><span class="nav-number">3.</span> <span class="nav-text">扩展：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML类图："><span class="nav-number">4.</span> <span class="nav-text">UML类图：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">imperfect</p>
+  <div class="site-description" itemprop="description">一个分享java有关技术的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">imperfect</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">172k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"imperfect.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="众所周知，电脑系统主要有三大类，linux，windows和macos。Linux是十分适合程序员开发的，安全，病毒少，能够让开发人员专注于代码；mac凭借电脑本身的品控和优良的ui，流畅的系统也获得不俗的用户；当然，全球使用人数最多的系统还是windows，因为基本买电脑都自带激活的正版的windows，而且mac主要是太贵太贵了。 其实windows系统并不是那么糟糕，重点在于你使用电脑的习惯">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让你的windows更高效">
+<meta property="og:url" content="https://imperfect.top/posts/windows-software.html">
+<meta property="og:site_name" content="imperfect">
+<meta property="og:description" content="众所周知，电脑系统主要有三大类，linux，windows和macos。Linux是十分适合程序员开发的，安全，病毒少，能够让开发人员专注于代码；mac凭借电脑本身的品控和优良的ui，流畅的系统也获得不俗的用户；当然，全球使用人数最多的系统还是windows，因为基本买电脑都自带激活的正版的windows，而且mac主要是太贵太贵了。 其实windows系统并不是那么糟糕，重点在于你使用电脑的习惯">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imperfect.top/posts/1.png">
+<meta property="og:image" content="https://imperfect.top/posts/2.png">
+<meta property="og:image" content="https://imperfect.top/posts/3.png">
+<meta property="og:image" content="https://imperfect.top/posts/4.png">
+<meta property="og:image" content="https://imperfect.top/posts/5.png">
+<meta property="og:image" content="https://imperfect.top/posts/6.png">
+<meta property="og:image" content="https://imperfect.top/posts/7.png">
+<meta property="og:image" content="https://imperfect.top/posts/8.png">
+<meta property="og:image" content="https://imperfect.top/posts/9.png">
+<meta property="article:published_time" content="2020-04-15T21:07:37.000Z">
+<meta property="article:modified_time" content="2020-05-05T03:20:26.307Z">
+<meta property="article:author" content="imperfect">
+<meta property="article:tag" content="其它">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imperfect.top/posts/1.png">
+
+<link rel="canonical" href="https://imperfect.top/posts/windows-software.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>让你的windows更高效 | imperfect</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="imperfect" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">imperfect</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/windows-software.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="imperfect">
+      <meta itemprop="description" content="一个分享java有关技术的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="imperfect">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          让你的windows更高效
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-15 21:07:37" itemprop="dateCreated datePublished" datetime="2020-04-15T21:07:37Z">2020-04-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-05 03:20:26" itemprop="dateModified" datetime="2020-05-05T03:20:26Z">2020-05-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>众所周知，电脑系统主要有三大类，linux，windows和macos。Linux是十分适合程序员开发的，安全，病毒少，能够让开发人员专注于代码；mac凭借电脑本身的品控和优良的ui，流畅的系统也获得不俗的用户；当然，全球使用人数最多的系统还是windows，因为基本买电脑都自带激活的正版的windows，而且mac主要是太贵太贵了。</p>
+<p>其实windows系统并不是那么糟糕，重点在于你使用电脑的习惯，不乱下载软件，不乱去某些网站这是必须的，下面将介绍几款我常用的软件给大家。<a id="more"></a></p>
+<h3 id="浏览器篇："><a href="#浏览器篇：" class="headerlink" title="浏览器篇："></a>浏览器篇：</h3><h4 id="edge："><a href="#edge：" class="headerlink" title="edge："></a>edge：</h4><p>肯定不是旧版的edge，而是基于chromium的新版edge，电脑应该会自动升级，也有可能需要去官网下载。</p>
+<h4 id="chrome："><a href="#chrome：" class="headerlink" title="chrome："></a>chrome：</h4><p>chrome就不用多说了，无脑推荐就完了</p>
+<h4 id="firefox："><a href="#firefox：" class="headerlink" title="firefox："></a>firefox：</h4><p>还有一个就是火狐，火狐的安全性比较高，好像是对前端比较友好？忘记了，但是这个也是个不错的选择，如果你实在是不知道选择哪个，那就都下载不香吗。</p>
+<h4 id="插件："><a href="#插件：" class="headerlink" title="插件："></a>插件：</h4><p>上述浏览器无论是ui界面，还是流畅度都比较不错。当然浏览器还离不开好的插件，这里就推荐我常用的几个插件给大家。</p>
+<ul>
+<li><strong>油猴：</strong>不多说，谁用谁知道</li>
+<li><strong>AdBlockPlus：</strong>目前用过最好的广告拦截插件，csdn烦人的广告终于去除掉了。</li>
+<li><strong>集装箱：</strong>可以优先装这个插件，能让你访问谷歌应用中心，不过更深层次的科学上网就不推荐了，还有就是能让你谷歌搜索，很大程度上谷歌搜索的内容还是比较优质的。</li>
+</ul>
+<p>其它的插件有没有，有，但是都不推荐，因为你下载那么多插件不用的话也是白白占用cpu资源，所以自己有需求的，可以去应用商店里面看一下啦。</p>
+<h3 id="搜索篇："><a href="#搜索篇：" class="headerlink" title="搜索篇："></a>搜索篇：</h3><p>当你想要找什么资料的时候，是不是苦于寻找之前放的位置，但是又想不起来。使用电脑自带的搜索，慢得不要不要的，这时候就需要搜索神器来帮我们解决问题啦。</p>
+<h4 id="listary："><a href="#listary：" class="headerlink" title="listary："></a>listary：</h4><p>下载安装完成后，界面是这样的</p>
+<p><img src="1.png" alt=""></p>
+<p>想要搜索东西的时候呢，只要唤醒就好啦，唤醒的快捷键大家可以根据喜好来设置。</p>
+<p><img src="2.png" alt=""></p>
+<p>可以看到，输入abc之后，所有的文件几乎是在瞬间就把，文件夹，文件，还有软件打开的快捷方式都给列出来了。</p>
+<h4 id="everything："><a href="#everything：" class="headerlink" title="everything："></a>everything：</h4><p><img src="3.png" alt=""></p>
+<p>everything也是把所有的文件夹给列出来，ui比listary美化不少。两款软件的功能都差不都，至于这选择哪一个呢，仁者见仁智者见智。问我？肯定都下载结合着用啦。</p>
+<h4 id="utools："><a href="#utools：" class="headerlink" title="utools："></a>utools：</h4><p>还有这款软件更加强大，但是好像我电脑安装后，老是出现收集错误信息的字样，就把它删了。</p>
+<h3 id="防护以及软件卸载："><a href="#防护以及软件卸载：" class="headerlink" title="防护以及软件卸载："></a>防护以及软件卸载：</h3><h4 id="火绒："><a href="#火绒：" class="headerlink" title="火绒："></a>火绒：</h4><p><img src="4.png" alt=""></p>
+<p><strong>零捆绑，零广告，零弹窗</strong>。个人习惯就是把3某0系的所有东西都卸载掉，也是我的个人建议，大家根据自己的实际情况而定。</p>
+<p>如果自己的使用电脑的习惯足够干净，其实不用防护软件也可以的，不过有总比没有好嘛。</p>
+<h4 id="CCleaner："><a href="#CCleaner：" class="headerlink" title="CCleaner："></a>CCleaner：</h4><p>一款优良的辣鸡清理软件，有免费版和付费版，免费版就够我们用啦。</p>
+<p><img src="5.png" alt=""></p>
+<p>亲身体验清理东西还是比较给力的，有时候c盘莫名多了几百m，跑不了是缓存没有清，跑下这个软件又可以开心的看到c盘多了起来。</p>
+<h4 id="Geekuninstall："><a href="#Geekuninstall：" class="headerlink" title="Geekuninstall："></a>Geekuninstall：</h4><p>上面推荐的ccleaner其实也可以卸载软件，但是下面这一款更加的好用。</p>
+<p><img src="6.png" alt=""></p>
+<h3 id="桌面美化："><a href="#桌面美化：" class="headerlink" title="桌面美化："></a>桌面美化：</h3><ul>
+<li>translucent：微软商店自带的一款透明栏软件</li>
+<li>火萤桌面：能够让你的桌面更加好看，有静态壁纸和动态壁纸，主要是免费</li>
+<li>wallpaperengine：steam上付费的桌面壁纸软件，让你找到正版好看的壁纸。当然，你非得用来干嘛，谁也拦不住你，只是不推荐。</li>
+</ul>
+<h3 id="其它小软件："><a href="#其它小软件：" class="headerlink" title="其它小软件："></a>其它小软件：</h3><h4 id="Snipaste（截图）："><a href="#Snipaste（截图）：" class="headerlink" title="Snipaste（截图）："></a>Snipaste（截图）：</h4><p><img src="7.png" alt=""></p>
+<p>随时随地，F1截图，F3贴图，实在是方便。</p>
+<h4 id="PotPlayer（播放器）："><a href="#PotPlayer（播放器）：" class="headerlink" title="PotPlayer（播放器）："></a>PotPlayer（播放器）：</h4><p><img src="8.png" alt=""></p>
+<p>全能播放器，你能想到的视频格式，都能播放，还支持多个功能。</p>
+<h4 id="foxit阅读器（阅读pdf）："><a href="#foxit阅读器（阅读pdf）：" class="headerlink" title="foxit阅读器（阅读pdf）："></a>foxit阅读器（阅读pdf）：</h4><p>国产比较好用的免费的pdf阅读软件，不过你想要<strong>无水印修改</strong>还是要付费的。</p>
+<p><img src="9.png" alt=""></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%B6%E5%AE%83/" rel="tag"># 其它</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/design-composite.html" rel="prev" title="组合模式【java设计模式】">
+      <i class="fa fa-chevron-left"></i> 组合模式【java设计模式】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/thread-volatile.html" rel="next" title="volatile详解">
+      volatile详解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器篇："><span class="nav-number">1.</span> <span class="nav-text">浏览器篇：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#edge："><span class="nav-number">1.1.</span> <span class="nav-text">edge：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chrome："><span class="nav-number">1.2.</span> <span class="nav-text">chrome：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#firefox："><span class="nav-number">1.3.</span> <span class="nav-text">firefox：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插件："><span class="nav-number">1.4.</span> <span class="nav-text">插件：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索篇："><span class="nav-number">2.</span> <span class="nav-text">搜索篇：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#listary："><span class="nav-number">2.1.</span> <span class="nav-text">listary：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#everything："><span class="nav-number">2.2.</span> <span class="nav-text">everything：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#utools："><span class="nav-number">2.3.</span> <span class="nav-text">utools：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防护以及软件卸载："><span class="nav-number">3.</span> <span class="nav-text">防护以及软件卸载：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#火绒："><span class="nav-number">3.1.</span> <span class="nav-text">火绒：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CCleaner："><span class="nav-number">3.2.</span> <span class="nav-text">CCleaner：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geekuninstall："><span class="nav-number">3.3.</span> <span class="nav-text">Geekuninstall：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桌面美化："><span class="nav-number">4.</span> <span class="nav-text">桌面美化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它小软件："><span class="nav-number">5.</span> <span class="nav-text">其它小软件：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Snipaste（截图）："><span class="nav-number">5.1.</span> <span class="nav-text">Snipaste（截图）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PotPlayer（播放器）："><span class="nav-number">5.2.</span> <span class="nav-text">PotPlayer（播放器）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#foxit阅读器（阅读pdf）："><span class="nav-number">5.3.</span> <span class="nav-text">foxit阅读器（阅读pdf）：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">imperfect</p>
+  <div class="site-description" itemprop="description">一个分享java有关技术的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">imperfect</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">172k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

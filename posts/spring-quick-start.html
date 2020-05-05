@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"imperfect.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Spring一、功能Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器框架，就是把我们的实体类交给容器来管理，要使用的话不必要new，而是从框架里面getBeen即可。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring【快速入门】">
+<meta property="og:url" content="https://imperfect.top/posts/spring-quick-start.html">
+<meta property="og:site_name" content="imperfect">
+<meta property="og:description" content="Spring一、功能Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器框架，就是把我们的实体类交给容器来管理，要使用的话不必要new，而是从框架里面getBeen即可。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imperfect.top/posts/spring%E7%9B%AE%E5%BD%95.png">
+<meta property="og:image" content="https://imperfect.top/posts/springList.png">
+<meta property="og:image" content="https://imperfect.top/posts/spring%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2020-04-02T21:30:42.000Z">
+<meta property="article:modified_time" content="2020-05-05T03:35:11.688Z">
+<meta property="article:author" content="imperfect">
+<meta property="article:tag" content="快速入门">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imperfect.top/posts/spring%E7%9B%AE%E5%BD%95.png">
+
+<link rel="canonical" href="https://imperfect.top/posts/spring-quick-start.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>spring【快速入门】 | imperfect</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="imperfect" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">imperfect</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://imperfect.top/posts/spring-quick-start.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="imperfect">
+      <meta itemprop="description" content="一个分享java有关技术的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="imperfect">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          spring【快速入门】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-02 21:30:42" itemprop="dateCreated datePublished" datetime="2020-04-02T21:30:42Z">2020-04-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-05 03:35:11" itemprop="dateModified" datetime="2020-05-05T03:35:11Z">2020-05-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ssm/" itemprop="url" rel="index"><span itemprop="name">ssm</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><h3 id="一、功能"><a href="#一、功能" class="headerlink" title="一、功能"></a>一、功能</h3><p>Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器框架，就是把我们的实体类交给容器来管理，要使用的话不必要new，而是从框架里面getBeen即可。<a id="more"></a></p>
+<h3 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h3><h4 id="2-1-IOC"><a href="#2-1-IOC" class="headerlink" title="2.1 IOC"></a>2.1 IOC</h4><h5 id="2-1-1创建dea工程"><a href="#2-1-1创建dea工程" class="headerlink" title="2.1.1创建dea工程"></a>2.1.1创建dea工程</h5><p>项目结构目录</p>
+<p>​                   <img src="spring%E7%9B%AE%E5%BD%95.png" alt="spring目录"><br>​    </p>
+<h5 id="2-1-2-创建一个Address类和Student类"><a href="#2-1-2-创建一个Address类和Student类" class="headerlink" title="2.1.2 创建一个Address类和Student类"></a>2.1.2 创建一个Address类和Student类</h5><h6 id="Address-java"><a href="#Address-java" class="headerlink" title="Address.java"></a>Address.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String province;</span><br><span class="line">    <span class="keyword">private</span> String street;</span><br><span class="line">    <span class="comment">//get和set方法</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//一个全参构造，一个无参构造，为什么这样呢？卖个关子</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="Student-java"><a href="#Student-java" class="headerlink" title="Student.java"></a>Student.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String judge;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//get和set方法</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//同样一个无参构造，一个全参构造</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-1-3-spring的配置文件"><a href="#2-1-3-spring的配置文件" class="headerlink" title="2.1.3 spring的配置文件"></a>2.1.3 spring的配置文件</h5><h6 id="applicationContext-xml"><a href="#applicationContext-xml" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--id:唯一识别这个been的字段，</span></span><br><span class="line"><span class="comment">        无论是been与been之间的ref还是取been都是用这个识别</span></span><br><span class="line"><span class="comment">        class: 这个been的实体类--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--有两种方法来装配been，一是使用constructor-arg，需要实体类提供相对应的构造函数，</span></span><br><span class="line"><span class="comment">        另外就是使用property，需要提供无参构造函数--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--1、constructor-arg，需要对应的构造函数</span></span><br><span class="line"><span class="comment">        可以使用index或者type来给相应的属性赋值，使用index能够有效的避免同type的情况--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"address"</span> <span class="attr">class</span>=<span class="string">"com.imperfect.entity.Address"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"gds"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">type</span>=<span class="string">"java.lang.String"</span> <span class="attr">value</span>=<span class="string">"lczx"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--2、property</span></span><br><span class="line"><span class="comment">        name:实体类中的属性名称，不能乱写</span></span><br><span class="line"><span class="comment">        value:所要赋的值</span></span><br><span class="line"><span class="comment">        ref:所要指向been的id--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"student"</span> <span class="attr">class</span>=<span class="string">"com.imperfect.entity.Student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"temp_name"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"18"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"judge"</span> <span class="attr">value</span>=<span class="string">"good"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"address"</span> <span class="attr">ref</span>=<span class="string">"address"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--这里要讲的是内部been--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"student2"</span> <span class="attr">class</span>=<span class="string">"com.imperfect.entity.Student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"temp_name2"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"20"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"judge"</span> <span class="attr">value</span>=<span class="string">"excellent"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--在property里面还可以配置内部been，同样的，如果实体类中的某一个属性是list，map，array呢？则同样可以在property下配置--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--需要注意的是，内部been只能在内部使用，在外部是无法取到的--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"address"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"address2"</span> <span class="attr">class</span>=<span class="string">"com.imperfect.entity.Address"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"province"</span> <span class="attr">value</span>=<span class="string">"zjs"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"street"</span> <span class="attr">value</span>=<span class="string">"abc"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>先看看property里面有哪些标签，可以看到可以配置been，array，list等</p>
+<p><img src="springList.png" alt="springList"></p>
+<h5 id="2-1-4-测试"><a href="#2-1-4-测试" class="headerlink" title="2.1.4 测试"></a>2.1.4 测试</h5><h6 id="TestSpring-java"><a href="#TestSpring-java" class="headerlink" title="TestSpring.java"></a>TestSpring.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSpring</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">        <span class="comment">//getBeen(a)里面的字段就是我们配置been的id值</span></span><br><span class="line">        <span class="comment">//spring就是根据a去ioc容器里面找，如果找到id=a，则返回这个Been</span></span><br><span class="line">        Address address = (Address) ctx.getBean(<span class="string">"address"</span>);</span><br><span class="line">        Student student = (Student) ctx.getBean(<span class="string">"student"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//注意下面是得不到been的，因为它是内部been</span></span><br><span class="line"><span class="comment">//        Address address1 = (Address) ctx.getBean("address2");</span></span><br><span class="line">        Student student1 = (Student) ctx.getBean(<span class="string">"student2"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(address);</span><br><span class="line">        System.out.println(student);</span><br><span class="line">        System.out.println(student1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<p><img src="spring%E7%BB%93%E6%9E%9C.png" alt="spring结果"></p>
+<p>可以看到已经把been取出来，并且取出成功了，这个是我们刚初学的时候用到最多的装配been，取出been的知识点。</p>
+<p><strong>以上呢是基于xml配置的方法来装配been，除此之外我们还可以使用注解的方法</strong></p>
+<h5 id="2-1-5-基于注解的方式"><a href="#2-1-5-基于注解的方式" class="headerlink" title="2.1.5 基于注解的方式"></a>2.1.5 基于注解的方式</h5><p>新建一个annotation包，在包下面呢定义三个类  </p>
+<h6 id="Autowired-java"><a href="#Autowired-java" class="headerlink" title="Autowired.java"></a>Autowired.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@Component, @Controller, @Service都是表示把这个类交个ioc容器来管理</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Autowired</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Autowired method"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="MethodI-java"><a href="#MethodI-java" class="headerlink" title="MethodI.java"></a>MethodI.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MethodI</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//很简单的一个接口</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="MethodImpl-java"><a href="#MethodImpl-java" class="headerlink" title="MethodImpl.java"></a>MethodImpl.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同样表示把这个类交给ioc容器来管理,这里的value值就是我们xml中的id</span></span><br><span class="line"><span class="comment">//如果只是@Component其它都不写呢，它默认会把value设为类名的第一个字母小写</span></span><br><span class="line"><span class="meta">@Component</span>(value=<span class="string">"abc"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodImpl</span> <span class="keyword">implements</span> <span class="title">MethodI</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Autowired类不是在之前已经交给ioc容器来管理了嘛</span></span><br><span class="line">    <span class="comment">//这个注解呢就相当于从ioc容器中取，就是自动装配</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    Autowired autowired;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Before Autowired method"</span>);</span><br><span class="line">        autowired.method();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个测试方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</span><br><span class="line">        ApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//这里的getbeen就是上面@Component中value的值</span></span><br><span class="line">    MethodI methodI = (MethodI) ctx.getBean(<span class="string">"abc"</span>);	</span><br><span class="line">    </span><br><span class="line">    methodI.method();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有关注解怎样装配been也简单的过了一下了，下面就开始我们的aop(面向切面编程)的基础知识介绍</p>
+<h4 id="2-2-AOP"><a href="#2-2-AOP" class="headerlink" title="2.2 AOP"></a>2.2 AOP</h4><h5 id="2-2-1-创建一个aop的包，并且创建三个类"><a href="#2-2-1-创建一个aop的包，并且创建三个类" class="headerlink" title="2.2.1 创建一个aop的包，并且创建三个类"></a>2.2.1 创建一个aop的包，并且创建三个类</h5><h6 id="CalculateI-java"><a href="#CalculateI-java" class="headerlink" title="CalculateI.java"></a>CalculateI.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CalculateI</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sub</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">div</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="CalculateImpl-java"><a href="#CalculateImpl-java" class="headerlink" title="CalculateImpl.java"></a>CalculateImpl.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CalculateImpl</span> <span class="keyword">implements</span> <span class="title">CalculateI</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = i + j;</span><br><span class="line">        System.out.println(<span class="string">"The result is "</span> + result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sub</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = i - j;</span><br><span class="line">        System.out.println(<span class="string">"The result is "</span> + result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = i * j;</span><br><span class="line">        System.out.println(<span class="string">"The result is "</span> + result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">div</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = i / j;</span><br><span class="line">        System.out.println(<span class="string">"The result is "</span> + result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有四个方法</p>
+<p>现在想在每个方法的前后加两个切面（日志），形象化来说呢，就是这四个方法分别是鲁班一号，鲁班二号，鲁班三号，鲁班四号，两个切面分别是猴子，阿珂，现在先暂时这样想。</p>
+<p>接着看看配置文件是怎么开始我们的切后排（切面）之路的。</p>
+<h5 id="2-2-2-配置文件"><a href="#2-2-2-配置文件" class="headerlink" title="2.2.2 配置文件"></a>2.2.2 配置文件</h5><h6 id="applicationContext-xml-1"><a href="#applicationContext-xml-1" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--正常的been配置，因为我们之后要用到calculateImpl--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"calculateImpl"</span> <span class="attr">class</span>=<span class="string">"com.imperfect.spring.aop.CalculateImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"loggingAspect"</span> <span class="attr">class</span>=<span class="string">"com.imperfect.spring.aop.LoggingAspect"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置aop--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--我们在打团的时候，需要切谁，expression就是我们要切的对象，这样写是把鲁班们都切了，有切谁还不行啊，还要知道是谁切，是猴子切呢，还是阿珂切呢--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pointcut"</span> <span class="attr">expression</span>=<span class="string">"execution(public int com.imperfect.spring.aop.CalculateImpl.*(*, *))"</span>/&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!--ref:指定要切的类（包括猴子和阿珂）</span></span><br><span class="line"><span class="comment">            aop:before:什么时候切，是开团的时候切呢，还是收割呢</span></span><br><span class="line"><span class="comment">            method：是猴子切还是阿珂切</span></span><br><span class="line"><span class="comment">            pointcut-ref: 切鲁班一号还是鲁班二号--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"aspect"</span> <span class="attr">ref</span>=<span class="string">"loggingAspect"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"loggingBegin"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:before</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" rel="tag"># 快速入门</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/leetcode-list.html" rel="prev" title="链表篇【leetcode题解】">
+      <i class="fa fa-chevron-left"></i> 链表篇【leetcode题解】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/springmvc-quick-start.html" rel="next" title="springmvc【快速入门】">
+      springmvc【快速入门】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">1.</span> <span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、功能"><span class="nav-number">1.1.</span> <span class="nav-text">一、功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、使用"><span class="nav-number">1.2.</span> <span class="nav-text">二、使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-IOC"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 IOC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1创建dea工程"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">2.1.1创建dea工程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2-创建一个Address类和Student类"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">2.1.2 创建一个Address类和Student类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Address-java"><span class="nav-number">1.2.1.2.1.</span> <span class="nav-text">Address.java</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Student-java"><span class="nav-number">1.2.1.2.2.</span> <span class="nav-text">Student.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-3-spring的配置文件"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">2.1.3 spring的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#applicationContext-xml"><span class="nav-number">1.2.1.3.1.</span> <span class="nav-text">applicationContext.xml</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-4-测试"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">2.1.4 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#TestSpring-java"><span class="nav-number">1.2.1.4.1.</span> <span class="nav-text">TestSpring.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-5-基于注解的方式"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">2.1.5 基于注解的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Autowired-java"><span class="nav-number">1.2.1.5.1.</span> <span class="nav-text">Autowired.java</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MethodI-java"><span class="nav-number">1.2.1.5.2.</span> <span class="nav-text">MethodI.java</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MethodImpl-java"><span class="nav-number">1.2.1.5.3.</span> <span class="nav-text">MethodImpl.java</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-AOP"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-创建一个aop的包，并且创建三个类"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">2.2.1 创建一个aop的包，并且创建三个类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CalculateI-java"><span class="nav-number">1.2.2.1.1.</span> <span class="nav-text">CalculateI.java</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#CalculateImpl-java"><span class="nav-number">1.2.2.1.2.</span> <span class="nav-text">CalculateImpl.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-配置文件"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2.2.2 配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#applicationContext-xml-1"><span class="nav-number">1.2.2.2.1.</span> <span class="nav-text">applicationContext.xml</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">imperfect</p>
+  <div class="site-description" itemprop="description">一个分享java有关技术的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">imperfect</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">172k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
